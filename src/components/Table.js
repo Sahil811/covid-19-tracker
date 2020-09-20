@@ -1,4 +1,5 @@
 import React from "react";
+import "./Table.css";
 
 const Table = ({ countries }) => {
   return (
@@ -6,7 +7,9 @@ const Table = ({ countries }) => {
       {countries.map(({ country, cases }) => (
         <tr>
           <td>{country}</td>
-          <td>{cases}</td>
+          <td>
+            <strong>{cases}</strong>
+          </td>
         </tr>
       ))}
     </div>

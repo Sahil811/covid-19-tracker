@@ -10,6 +10,8 @@ import {
 import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
 import Table from "./components/Table";
+import LineGraph from "./components/LineGraph";
+import { sortData } from "./util";
 
 function App() {
   const [country, setInputCountry] = useState("worldwide");
@@ -39,8 +41,9 @@ function App() {
             value: country.countryInfo.iso2,
           }));
 
+          const sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);
-          setTableData(data);
         });
     };
 
@@ -112,6 +115,8 @@ function App() {
           <h3>Live Cases by Country</h3>
           <Table countries={tableData} />
           <h3>Worldwide new cases</h3>
+
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
