@@ -48,7 +48,7 @@ const options = {
   },
 };
 
-const LineGraph = () => {
+const LineGraph = ({ casesType }) => {
   const [data, setData] = useState({});
 
   const buildChartData = (data, casesType = "cases") => {
@@ -82,7 +82,24 @@ const LineGraph = () => {
     fetchData();
   }, []);
 
-  return <div>{/* <Line data options /> */}</div>;
+  return (
+    <div>
+      {data?.length > 0 && (
+        <Line
+          data={{
+            datasets: [
+              {
+                backgroundColor: "rgba(204, 16, 52, 0.5)",
+                borderColor: "#CC1034",
+                data: data,
+              },
+            ],
+          }}
+          options={options}
+        />
+      )}
+    </div>
+  );
 };
 
 export default LineGraph;
