@@ -66,10 +66,11 @@ function App() {
         setCountryInfo(data);
         if (countryCode !== "worldwide") {
           setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+          setMapZoom(4);
         } else {
           setMapCenter({ lat: 28.6448, lng: 77.216721 });
+          setMapZoom(3);
         }
-        setMapZoom(4);
       });
   };
 
