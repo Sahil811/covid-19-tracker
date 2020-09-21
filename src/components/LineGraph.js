@@ -95,6 +95,14 @@ const LineGraph = ({ casesType, country, ...props }) => {
     fetchData();
   }, [casesType, country]);
 
+  const dataColor =
+    casesType === "recovered"
+      ? {
+          backgroundColor: "rgba(144,238,144 , 0.5 )",
+          borderColor: "#008F11",
+        }
+      : { backgroundColor: "rgba(204, 16, 52, 0.5)", borderColor: "#CC1034" };
+
   return (
     <div className={props.className}>
       {data?.length > 0 && (
@@ -102,8 +110,7 @@ const LineGraph = ({ casesType, country, ...props }) => {
           data={{
             datasets: [
               {
-                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#CC1034",
+                ...dataColor,
                 data: data,
               },
             ],
