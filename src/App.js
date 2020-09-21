@@ -11,7 +11,7 @@ import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
 import Table from "./components/Table";
 import LineGraph from "./components/LineGraph";
-import { sortData } from "./util";
+import { sortData, prettyPrintStat } from "./util";
 import "leaflet/dist/leaflet.css";
 
 function App() {
@@ -93,32 +93,45 @@ function App() {
 
         <div className="app__stats">
           <InfoBox
+            isRed
+            active={casesType === "cases"}
+            onClick={(e) => setCasesType("cases")}
             title="Coronavirus Cases"
-            cases={countryInfo.todayCases}
+            cases={prettyPrintStat(countryInfo.todayCases)}
             total={countryInfo.cases}
           />
           <InfoBox
+            active={casesType === "recovered"}
+            onClick={(e) => setCasesType("recovered")}
             title="Recovered"
-            cases={countryInfo.todayRecovered}
+            cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={countryInfo.deaths}
           />
           <InfoBox
+            isRed
+            active={casesType === "deaths"}
+            onClick={(e) => setCasesType("deaths")}
             title="Deaths"
-            cases={countryInfo.todayDeaths}
+            cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={countryInfo.deaths}
           />
         </div>
 
-        <Map center={mapCenter} zoom={mapZoom} countries={mapCountries} />
+        <Map
+          center={mapCenter}
+          zoom={mapZoom}
+          countries={mapCountries}
+          casesType={casesType}
+        />
       </div>
 
       <Card className="app__right">
         <CardContent>
           <h3>Live Cases by Country</h3>
           <Table countries={tableData} />
-          <h3>Worldwide new cases</h3>
+          <h3 className="app__graphTitle">Worldwide new {casesType}</h3>
 
-          <LineGraph />
+          <LineGraph casesType={casesType} className="app__graph" />
         </CardContent>
       </Card>
     </div>

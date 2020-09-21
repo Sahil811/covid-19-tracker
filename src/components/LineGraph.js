@@ -48,10 +48,10 @@ const options = {
   },
 };
 
-const LineGraph = ({ casesType }) => {
+const LineGraph = ({ casesType, ...props }) => {
   const [data, setData] = useState({});
 
-  const buildChartData = (data, casesType = "cases") => {
+  const buildChartData = (data, casesType) => {
     let chartData = [];
     let lastDataPoint;
     for (let date in data.cases) {
@@ -74,16 +74,16 @@ const LineGraph = ({ casesType }) => {
           return response.json();
         })
         .then((data) => {
-          const chartData = buildChartData(data);
+          const chartData = buildChartData(data, casesType);
           setData(chartData);
         });
     };
 
     fetchData();
-  }, []);
+  }, [casesType]);
 
   return (
-    <div>
+    <div className={props.className}>
       {data?.length > 0 && (
         <Line
           data={{
