@@ -18,6 +18,7 @@ function App() {
   const [country, setInputCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [countries, setCountries] = useState([]);
+  const [countryName, setCountryName] = useState("Worldwide");
   const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState("cases");
@@ -65,11 +66,13 @@ function App() {
         setInputCountry(countryCode);
         setCountryInfo(data);
         if (countryCode !== "worldwide") {
+          setCountryName(data.country);
           setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
           setMapZoom(4);
         } else {
           setMapCenter({ lat: 28.6448, lng: 77.216721 });
           setMapZoom(3);
+          setCountryName("Worldwide");
         }
       });
   };
@@ -134,9 +137,15 @@ function App() {
         <CardContent>
           <h3>Live Cases by Country</h3>
           <Table countries={tableData} />
-          <h3 className="app__graphTitle">Worldwide new {casesType}</h3>
+          <h3 className="app__graphTitle">
+            {countryName} new {casesType}
+          </h3>
 
-          <LineGraph casesType={casesType} className="app__graph" />
+          <LineGraph
+            casesType={casesType}
+            country={country}
+            className="app__graph"
+          />
         </CardContent>
       </Card>
     </div>
