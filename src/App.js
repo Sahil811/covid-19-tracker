@@ -44,6 +44,7 @@ function App() {
 
           const sortedData = sortData(data);
           setTableData(sortedData);
+          setMapCountries(data);
           setCountries(countries);
         });
     };
@@ -108,7 +109,7 @@ function App() {
           />
         </div>
 
-        <Map center={mapCenter} zoom={mapZoom} />
+        <Map center={mapCenter} zoom={mapZoom} countries={mapCountries} />
       </div>
 
       <Card className="app__right">

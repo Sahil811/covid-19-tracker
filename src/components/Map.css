@@ -11,3 +11,23 @@
 .map .leaflet-container {
   height: 100%;
 }
+
+.info-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+}
+
+.info-flag {
+  height: 80px;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 7px;
+  border: 0.2px solid lightgray;
+}
+.info-confirmed,
+.info-recovered,
+.info-deaths {
+  margin-top: 3px;
+}
